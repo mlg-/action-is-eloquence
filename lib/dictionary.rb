@@ -23,7 +23,8 @@ class Dictionary
       # maybe try going char by char here instead and use spaces as delimiters
       # to decide what a word is. also can delete bad stuff like numbers, weird chars
       line.split.each do |word|
-        self.frequency_map["#{word}"] += 1
+        normalized_word = word.downcase[/[a-z]+/]
+        self.frequency_map["#{normalized_word}"] += 1
       end
     end
   end

@@ -19,7 +19,6 @@ RSpec.describe Dictionary do
         let(:tiny_file_copy) { "spec/support/tiny-file-copy.txt" }
 
         before { File.open(tiny_file_copy, "w+") { |file| file.write(tiny_file_text) } }
-
         after { File.delete(tiny_file_copy) }
 
         it "can accept many file paths" do
@@ -35,12 +34,14 @@ RSpec.describe Dictionary do
         expect(dictionary.frequency_map["to"]).to eq(2)
         expect(dictionary.frequency_map["quickly"]).to eq(1)
       end
+
+      # add test case(s) for bad inputs like symbols, punctuation, and numbers
     end
   end
 
   context "files do not exist" do
     let(:tiny_file) { "fake-file.txt" }
-    
+
     describe "#build" do
       it "raises an error if any file does not exist" do
         expect{ dictionary.build }.to raise_error(FileDoesNotExistError)
