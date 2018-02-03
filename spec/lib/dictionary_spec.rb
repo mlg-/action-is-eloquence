@@ -1,9 +1,10 @@
 require "spec_helper"
 
 RSpec.describe Dictionary do
-  subject(:dictionary) { Dictionary.new(tiny_file) }
+  subject(:dictionary) { Dictionary.new(file_paths: file_paths) }
 
   context "a file exists" do
+    let(:file_paths) { [tiny_file] }
     let(:tiny_file) { "spec/support/tiny-file.txt" }
     let(:tiny_file_text) { "this is a little baby file \n to use as an example \n so not as to break one's brain too quickly" }
 
@@ -16,13 +17,14 @@ RSpec.describe Dictionary do
       end
 
       context "an additional file exists" do
+        let(:file_paths) { [tiny_file, tiny_file_copy] }
         let(:tiny_file_copy) { "spec/support/tiny-file-copy.txt" }
 
         before { File.open(tiny_file_copy, "w+") { |file| file.write(tiny_file_text) } }
         after { File.delete(tiny_file_copy) }
 
         it "can accept many file paths" do
-          expect{ Dictionary.new(tiny_file, tiny_file_copy).build }.not_to raise_error
+          expect{ dictionary.build }.not_to raise_error
         end
       end
     end
@@ -40,7 +42,8 @@ RSpec.describe Dictionary do
   end
 
   context "files do not exist" do
-    let(:tiny_file) { "fake-file.txt" }
+    let(:file_paths) { [fake_tiny_file] }
+    let(:fake_tiny_file) { "fake-file.txt" }
 
     describe "#build" do
       it "raises an error if any file does not exist" do

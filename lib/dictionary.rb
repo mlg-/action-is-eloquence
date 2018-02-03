@@ -1,7 +1,10 @@
-class Dictionary
-  attr_reader :frequency_map
+require_relative "fragment_map"
 
-  def initialize(*file_paths)
+class Dictionary
+  attr_reader :frequency_map, :fragment_map
+
+  def initialize(file_paths:)
+    @fragment_map = FragmentMap.new.build
     @frequency_map = Hash.new(0)
     @file_paths = file_paths
   end
@@ -12,10 +15,12 @@ class Dictionary
     file_paths.each do |file_path|
       record_word_frequencies_for_file_at(file_path)
     end
+
+    self
   end
 
   protected
-  attr_writer :frequency_map
+  attr_writer :frequency_map, :fragment_map
   attr_reader :file_paths
 
   def record_word_frequencies_for_file_at(file_path)
@@ -24,6 +29,8 @@ class Dictionary
       # to decide what a word is. also can delete bad stuff like numbers, weird chars
       line.split.each do |word|
         normalized_word = word.downcase[/[a-z]+/]
+        next if normalized_word.nil?
+        self.fragment_map = WordFragmentIndexer.new(word: normalized_word, fragment_map: self.fragment_map).index
         self.frequency_map["#{normalized_word}"] += 1
       end
     end
