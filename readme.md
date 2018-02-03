@@ -14,8 +14,8 @@ This Autocomplete library can return the most likely desired full word results f
 ```
 This part takes the longest as it indexes all provided text, but subsequent queries can be made on the object in memory (see step 4).
 The Autocompleter accepts three required keyword arguments:
-- `fragment`, which is to be a two character word fragment for which to find most likely completions.
-- `file_paths`, which can be any number of valid file paths in the current working directory. Any invalid path will result in an error.
+- `fragment`, which is to be a two character word fragment string for which to find most likely completions.
+- `file_paths`, which can be an array of any number of valid file paths relative to their place in the current working directory. Any invalid path will result in an error. The longer and bigger the files, the longer the indexing time on first run.
 - `result_format`, which accepts a string to determine what format to return the results. To get a hash with the top 25 (or fewer) most likely results, use "hash." All other values will return a string representation of your results, formatted for readability.
 3. Call `results` on your instance of `autocomplete` to see your results in the desired format:
 ```
