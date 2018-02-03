@@ -5,7 +5,7 @@ class Dictionary
 
   def initialize(file_paths:)
     @fragment_map = FragmentMap.new.build
-    @frequency_map = Hash.new(0)
+    @frequency_map = FrequencyMap.new
     @file_paths = file_paths
   end
 
@@ -31,7 +31,7 @@ class Dictionary
         normalized_word = word.downcase[/[a-z]+/]
         next if normalized_word.nil?
         self.fragment_map = WordFragmentIndexer.new(word: normalized_word, fragment_map: self.fragment_map).index
-        self.frequency_map["#{normalized_word}"] += 1
+        self.frequency_map.content["#{normalized_word}"] += 1
       end
     end
   end

@@ -14,15 +14,22 @@ class Autocompleter
   def results
     unranked_matches = dictionary.fragment_map[fragment]
     matches_with_unordered_rank = unranked_matches.each_with_object({}) do |match, matches|
-      matches["#{match}"] = dictionary.frequency_map[match]
+      matches["#{match}"] = dictionary.frequency_map.content[match]
     end
     ranked_results = matches_with_unordered_rank.sort_by { |_word, frequency| -frequency }[0..25].to_h
     result_format == "hash" ? ranked_results : print_nicely(ranked_results)
   end
 
+  def search_again_for(fragment: fragment)
+    self.fragment = fragment
+
+    results
+  end
+
   protected
-  attr_reader :fragment, :result_format
+  attr_reader :result_format
   attr_writer :dictionary
+  attr_accessor :fragment
 
   def print_nicely(ranked_results)
     pretty_string = "There are #{ranked_results.count} results for the fragment '#{fragment}':\n"

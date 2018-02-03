@@ -33,8 +33,8 @@ RSpec.describe Dictionary do
       before { dictionary.build }
       
       it "counts how many occurrences there are per word" do
-        expect(dictionary.frequency_map["to"]).to eq(2)
-        expect(dictionary.frequency_map["quickly"]).to eq(1)
+        expect(dictionary.frequency_map.content["to"]).to eq(2)
+        expect(dictionary.frequency_map.content["quickly"]).to eq(1)
       end
 
       # add test case(s) for bad inputs like symbols, punctuation, and numbers
