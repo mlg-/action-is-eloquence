@@ -25,15 +25,16 @@ class Dictionary
 
   def record_word_frequencies_for_file_at(file_path)
     File.open(file_path).each_line do |line|
-      # maybe try going char by char here instead and use spaces as delimiters
-      # to decide what a word is. also can delete bad stuff like numbers, weird chars
-      line.split.each do |word|
-        normalized_word = word.downcase[/[a-z]+/]
-        next if normalized_word.nil?
-        self.fragment_map = WordFragmentIndexer.new(word: normalized_word, fragment_map: self.fragment_map).index
+      line.downcase.scan(/[a-z]+/) do |normalized_word|
+        next if normalized_word.nil? || normalized_word.length == 1
+        self.fragment_map = index_word_fragments(normalized_word) unless frequency_map.content.key?(normalized_word)
         self.frequency_map.content["#{normalized_word}"] += 1
       end
     end
+  end
+
+  def index_word_fragments(normalized_word)
+    WordFragmentIndexer.new(word: normalized_word, fragment_map: self.fragment_map).index
   end
 end
 
