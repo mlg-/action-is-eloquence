@@ -6,7 +6,7 @@ class FragmentMap
   end
 
   def build
-    unique_combinations = ("a".."z").to_a.combination(2).map { |combination| combination.join }
+    unique_combinations = ("a".."z").to_a.combination(2).map(&:join)
     all_possible_fragments = unique_combinations.each_with_object([]) do |combination, expanded_collection|
       expanded_collection << combination # original unique combinations
       expanded_collection << combination.reverse # combinations are not order-dependent, so add all the reversals of the combinations we know about
