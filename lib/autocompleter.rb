@@ -20,8 +20,8 @@ class Autocompleter
     result_format == "hash" ? ranked_results : print_nicely(ranked_results)
   end
 
-  def search_again_for(fragment: fragment)
-    self.fragment = fragment
+  def search_again_for(fragment: new_fragment)
+    self.fragment = new_fragment
 
     results
   end
