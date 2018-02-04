@@ -14,7 +14,7 @@ class WordFragmentIndexer
     until end_index > last_char_index
       two_letter_fragment = word[start_index..end_index]
       start_index += 1; end_index += 1
-      fragment_map[two_letter_fragment] << word unless fragment_map[two_letter_fragment].include?(word)
+      fragment_map[two_letter_fragment] << word
     end
     fragment_map
   end
