@@ -31,7 +31,7 @@ autocompleter.results
 Here are some sample results using the full text of Shakespeare provided in spec/support/shakespeare-complete.txt`, taken from Project Gutenburg. (Please note that license frontmatter may slightly skew results for this and similar files).
 
 ### "th"
-There are 25 results for the fragment 'th':
+There are 25 results for the fragment 'th':    
 'the' appears 27843 times  
 'that' appears 11563 times  
 'with' appears 8066 times  
@@ -59,7 +59,7 @@ There are 25 results for the fragment 'th':
 'nothing' appears 636 times  
 
 ### "fr"
-There are 25 results for the fragment 'fr':
+There are 25 results for the fragment 'fr':  
 'from' appears 2670 times  
 'france' appears 528 times  
 'friends' appears 474 times  
@@ -87,7 +87,7 @@ There are 25 results for the fragment 'fr':
 'fray' appears 18 times  
 
 ### "pi"
-There are 25 results for the fragment 'pi':
+There are 25 results for the fragment 'pi':  
 'copies' appears 453 times  
 'spirit' appears 265 times  
 'pity' appears 221 times  
@@ -115,7 +115,7 @@ There are 25 results for the fragment 'pi':
 'rapier' appears 29 times  
 
 ### "sh"
-There are 25 results for the fragment 'sh':
+There are 25 results for the fragment 'sh':  
 'shall' appears 3602 times  
 'she' appears 2410 times  
 'should' appears 1580 times  
@@ -143,13 +143,13 @@ There are 25 results for the fragment 'sh':
 'shape' appears 87 times  
 
 ### "wu"
-There are 3 results for the fragment 'wu':
+There are 3 results for the fragment 'wu':  
 'swum' appears 2 times  
 'swung' appears 1 time  
 'wul' appears 1 time  
 
 ### "ar"
-There are 25 results for the fragment 'ar':
+There are 25 results for the fragment 'ar':  
 'are' appears 3917 times  
 'heart' appears 1061 times  
 'art' appears 936 times  
@@ -177,7 +177,7 @@ There are 25 results for the fragment 'ar':
 'mark' appears 258 times  
 
 ### "il"
-There are 25 results for the fragment 'il':
+There are 25 results for the fragment 'il':  
 'will' appears 5017 times  
 'till' appears 619 times  
 'still' appears 564 times  
@@ -207,7 +207,7 @@ There are 25 results for the fragment 'il':
 This result is a good example of how the license text in the example file skews results, as "illinois" appears over 200 times in a license snippet used between most plays/text file segments. Files may need to be cleaned or edited with other scripts before being run through the Autocompleter.
 
 ### "ne"
-There are 25 results for the fragment 'ne':
+There are 25 results for the fragment 'ne':  
 'one' appears 1809 times  
 'mine' appears 1170 times  
 'never' appears 1020 times  
@@ -235,7 +235,7 @@ There are 25 results for the fragment 'ne':
 'neither' appears 186 times  
 
 ### "se"
-There are 25 results for the fragment 'se':
+There are 25 results for the fragment 'se':  
 'see' appears 1463 times  
 'these' appears 1327 times  
 'whose' appears 618 times  
@@ -263,7 +263,7 @@ There are 25 results for the fragment 'se':
 'horse' appears 243 times  
 
 ### "pl"
-There are 25 results for the fragment 'pl':
+There are 25 results for the fragment 'pl':  
 'place' appears 458 times  
 'please' appears 395 times  
 'play' appears 356 times  
