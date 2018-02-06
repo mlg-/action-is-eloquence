@@ -3,7 +3,7 @@ require "spec_helper"
 RSpec.describe WordFragmentIndexer do
   subject(:word_fragment_indexer) { WordFragmentIndexer.new(word: word, fragment_map: fragment_map) }
 
-  let(:fragment_map) { FragmentMap.new.build }
+  let(:fragment_map) { FragmentMap.new.content }
 
   describe "#index" do
     before { word_fragment_indexer.index }

@@ -23,7 +23,7 @@ RSpec.describe Autocompleter do
     "
   }
 
-  describe "#result" do
+  describe "#results" do
     before(:each) { File.open(file_path, "w+") { |file| file.write(macbeth_text_fragment) } }
     after(:each) { File.delete(file_path) }
 

@@ -1,6 +1,7 @@
 require_relative "dictionary"
 
 class Autocompleter
+  attr_accessor :fragment
   attr_reader :dictionary
 
   def initialize(fragment:, file_paths:, result_format:)
@@ -12,24 +13,22 @@ class Autocompleter
   end
 
   def results
-    unranked_matches = dictionary.fragment_map[fragment]
-    matches_with_unordered_rank = unranked_matches.each_with_object({}) do |match, matches|
-      matches["#{match}"] = dictionary.frequency_map.content[match]
-    end
-    ranked_results = matches_with_unordered_rank.sort_by { |_word, frequency| -frequency }[0..25].to_h
-    result_format == "hash" ? ranked_results : print_nicely(ranked_results)
-  end
-
-  def search_again_for(fragment: new_fragment)
-    self.fragment = new_fragment
-
-    results
+    result_format == "hash" ? ranked_matches : print_nicely(ranked_matches)
   end
 
   protected
   attr_reader :result_format
   attr_writer :dictionary
-  attr_accessor :fragment
+
+  def all_matches
+    dictionary.fragment_map[fragment]
+  end
+
+  def ranked_matches
+    all_matches.each_with_object({}) do |match, matches|
+      matches["#{match}"] = dictionary.frequency_map[match]
+    end.sort_by { |_word, frequency| -frequency }[0..24].to_h
+  end
 
   def print_nicely(ranked_results)
     pretty_string = "There are #{ranked_results.count} results for the fragment '#{fragment}':\n"
