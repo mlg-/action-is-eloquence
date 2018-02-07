@@ -5,6 +5,8 @@ RSpec.describe Autocompleter do
 
   let(:fragment) { "th" }
   let(:file_path) { "spec/support/macbeth-fragment.txt" }
+  let(:file_paths) { [file_path] }
+  let(:result_format) { "hash" }
 
   let(:macbeth_text_fragment) {
     "HECATE. O, well done! I commend your pains,
@@ -45,6 +47,54 @@ RSpec.describe Autocompleter do
 
       it "returns a string representation of the results" do
         expect(autocompleter.results).to eq(pretty_result)
+      end
+    end
+  end
+
+  describe "error states" do
+    context "files do not exist" do
+      let(:file_paths) { [fake_tiny_file] }
+      let(:fake_tiny_file) { "fake-file.txt" }
+
+      it "raises an error if any file does not exist" do
+        expect{ autocompleter }.to raise_error(FileDoesNotExist)
+      end
+    end
+
+    context "fragment is invalid" do
+      before(:each) { File.open(file_path, "w+") { |file| file.write(macbeth_text_fragment) } }
+      after(:each) { File.delete(file_path) }
+
+      context "fragment is only one letter" do
+        let(:fragment) { "a" }
+
+        it "raises an error" do
+          expect{ autocompleter }.to raise_error(FragmentIsInvalid)
+        end
+      end
+
+      context "fragment is three letters" do
+        let(:fragment) { "aaa" }
+
+        it "raises an error" do
+          expect{ autocompleter }.to raise_error(FragmentIsInvalid)
+        end
+      end
+
+      context "fragment is an integer" do
+        let(:fragment) { 2 }
+
+        it "raises an error" do
+          expect{ autocompleter }.to raise_error(FragmentIsInvalid)
+        end
+      end
+
+      context "fragment is an invalid two-character string" do
+        let(:fragment) { "2!" }
+
+        it "raises an error" do
+          expect{ autocompleter }.to raise_error(FragmentIsInvalid)
+        end
       end
     end
   end

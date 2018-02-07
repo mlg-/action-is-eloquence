@@ -12,8 +12,6 @@ class Dictionary
   end
 
   def build
-    raise FileDoesNotExistError if file_paths.any? { |file| !File.exists?(file) }
-    
     file_paths.each { |file_path| record_word_frequencies_for_file_at(file_path) }
 
     self
@@ -37,11 +35,5 @@ class Dictionary
     fragment_indexer = WordFragmentIndexer.new(word: normalized_word, fragment_map: self.fragment_map)
     fragment_indexer.index
     fragment_indexer.fragment_map # pass back the modified fragment map
-  end
-end
-
-class FileDoesNotExistError < StandardError
-  def initialize(msg="One or more of your files could not be located, please check the paths and try again.")
-    super
   end
 end

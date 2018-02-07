@@ -35,14 +35,5 @@ RSpec.describe Dictionary do
         end
       end
     end
-
-    context "files do not exist" do
-      let(:file_paths) { [fake_tiny_file] }
-      let(:fake_tiny_file) { "fake-file.txt" }
-
-      it "raises an error if any file does not exist" do
-        expect{ dictionary.build }.to raise_error(FileDoesNotExistError)
-      end
-    end
   end
 end

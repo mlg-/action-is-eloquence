@@ -7,6 +7,9 @@ class Autocompleter
   def initialize(fragment:, file_paths:, result_format:)
     @fragment = fragment
     @file_paths = file_paths
+
+    check_for_bad_data
+
     @result_format = result_format
 
     @dictionary = Dictionary.new(file_paths: file_paths).build
@@ -17,7 +20,7 @@ class Autocompleter
   end
 
   protected
-  attr_reader :result_format
+  attr_reader :result_format, :file_paths
   attr_writer :dictionary
 
   def all_matches
@@ -38,5 +41,30 @@ class Autocompleter
       pretty_string << "\n" unless ranked_results.keys.last == word
     end
     pretty_string
+  end
+
+  def check_for_bad_data
+    check_for_invalid_file_paths
+    check_for_invalid_fragment
+  end
+
+  def check_for_invalid_file_paths
+    raise FileDoesNotExist if file_paths.nil? || file_paths.any? { |file| !File.exists?(file) }
+  end
+
+  def check_for_invalid_fragment
+    raise FragmentIsInvalid if fragment.nil? || !fragment.is_a?(String) || fragment.match(/\A[a-z]{2}\z/).nil?
+  end
+end
+
+class FileDoesNotExist < StandardError
+  def initialize(msg="One or more of your files could not be located, please check the paths and try again.")
+    super
+  end
+end
+
+class FragmentIsInvalid < StandardError
+  def initialize(msg="The fragment to complete must be a two-letter string.")
+    super
   end
 end
